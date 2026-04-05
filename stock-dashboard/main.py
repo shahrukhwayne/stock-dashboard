@@ -105,4 +105,4 @@ def compare(symbol1: str, symbol2: str):
 def predict(symbol: str):
     return {"prediction": predict_price(symbol)}
 
-app.mount("/", StaticFiles(directory="frontend/build", html=True), name="static")
+app.mount("/", StaticFiles(directory="frontend/dist", html=True), name="static")
