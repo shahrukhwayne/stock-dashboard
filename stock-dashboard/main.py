@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 import yfinance as yf
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from api.predict import predict_price
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.inmemory import InMemoryBackend
 from fastapi_cache.decorator import cache
+
 
 
 
@@ -102,3 +104,5 @@ def compare(symbol1: str, symbol2: str):
 @app.get("/predict/{symbol}")
 def predict(symbol: str):
     return {"prediction": predict_price(symbol)}
+
+app.mount("/", StaticFiles(directory="frontend/build", html=True), name="static")
